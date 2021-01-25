@@ -1,7 +1,19 @@
 # Short script to compute the 948 x 948 covariance matrix from the
 # RegMap genotype data. In genetics, this is sometimes called the
 # "kinship matrix".
+#
+# This script is intended to be run from the command-line shell. It
+# accepts a single argument specifying the number of genetic markers
+# to use in the covariance matrix calculation. For example, to compute
+# the covariance matrix using 1,000 markers, run this command:
+#
+#   Rscript compute_cov.R 1000
+#
 library(data.table)
+
+# Process the command-line arguments.
+args <- commandArgs(trailingOnly = TRUE)
+m    <- as.numeric(args[1])
 
 # So that the results are reproducible, set the seed.
 set.seed(1)
@@ -13,14 +25,12 @@ geno <- fread("geno.csv.gz",sep = ",",header = TRUE)
 geno <- as.matrix(geno)
 storage.mode(geno) <- "double"
 
-# Select a random subset of 200,000 genetic markers.
-n <- 2e5
-i <- sample(ncol(geno),n)
+# Select a random subset of m genetic markers.
+i <- sample(ncol(geno),m)
 geno <- geno[,i]
 
 # Compute the covariance matrix.
 n <- nrow(geno)
-m <- ncol(geno)
 cat(sprintf("Computing %d x %d covariance matrix using %d markers.\n",n,n,m))
 t0   <- proc.time()
 geno <- scale(geno,center = TRUE,scale = FALSE)
