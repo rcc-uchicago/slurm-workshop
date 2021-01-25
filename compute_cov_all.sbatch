@@ -9,6 +9,8 @@
 
 # For reproducibility, add version numbers to the "module load" calls.
 module load R/3.6.1
+
+# Tell OpenBLAS to use 4 threads.
 export OPENBLAS_NUM_THREADS=4
 
 # Run the R script.

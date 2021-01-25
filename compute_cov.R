@@ -5,7 +5,8 @@
 # This script is intended to be run from the command-line shell. It
 # accepts a single argument specifying the number of genetic markers
 # to use in the covariance matrix calculation. For example, to compute
-# the covariance matrix using 1,000 markers, run this command:
+# the covariance matrix using a random subset of 1,000 markers, run
+# this command:
 #
 #   Rscript compute_cov.R 1000
 #
@@ -26,7 +27,7 @@ geno <- as.matrix(geno)
 storage.mode(geno) <- "double"
 
 # Select a random subset of m genetic markers.
-i <- sample(ncol(geno),m)
+i    <- sample(ncol(geno),m)
 geno <- geno[,i]
 
 # Compute the covariance matrix.
@@ -39,5 +40,6 @@ t1   <- proc.time()
 print(t1 - t0)
 
 # Save the covariance matrix.
-cat("Saving the covariance matrix to cov.Rdata.\n")
-save(list = "R",file = "cov.RData")
+outfile <- sprintf("cov_%d.RData",m)
+cat("Saving the covariance matrix to ",outfile,".\n",sep="")
+save(list = "R",file = outfile)
