@@ -1,10 +1,8 @@
 #!/bin/bash
 
-## #SBATCH --partition=broadwl
-## #SBATCH --reservation=slurm_workshop
 #SBATCH --job-name=compute_cov_all
-#SBATCH --partition=mstephens
-#SBATCH --account=pi-mstephens
+#SBATCH --partition=broadwl
+#SBATCH --reservation=slurm_workshop
 #SBATCH --time=00:10:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
