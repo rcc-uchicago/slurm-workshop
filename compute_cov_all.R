@@ -13,11 +13,6 @@ geno <- fread("geno.csv.gz",sep = ",",header = TRUE)
 geno <- as.matrix(geno)
 storage.mode(geno) <- "double"
 
-# Select a random subset of 200,000 genetic markers.
-n <- 2e5
-i <- sample(ncol(geno),n)
-geno <- geno[,i]
-
 # Compute the covariance matrix.
 n <- nrow(geno)
 m <- ncol(geno)
