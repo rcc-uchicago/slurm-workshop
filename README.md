@@ -1,3 +1,3 @@
-# slurm-workshop-jan-2021
+# slurm-workshop
 
 Materials for RCC Introductory Slurm workshop.
